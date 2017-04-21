@@ -4,15 +4,15 @@ services:
         container_name: web
         image: nginx:latest
         ports:
-            - "8080:80"
+            - "80:80"
         volumes:
             - ./www:/www
-            - ./default.conf:/etc/nginx/conf.d/default.conf
+            - ./.docker/images/nginx/vhosts.conf:/etc/nginx/conf.d/vhosts.conf
         links:
             - php
     php:
         container_name: php
-        image: php:5.6-fpm
+        build: ./.docker/images/php-fpm
         volumes:
+            - ./.docker/images/php-fpm/php.ini:/usr/local/etc/php/php.ini
             - ./www:/www
-            
