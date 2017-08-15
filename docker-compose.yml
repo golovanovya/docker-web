@@ -10,9 +10,14 @@ services:
             - ./.docker/images/nginx/vhosts.conf:/etc/nginx/conf.d/vhosts.conf
         links:
             - php
+            - redis
     php:
         container_name: php
         build: ./.docker/images/php-fpm
         volumes:
             - ./.docker/images/php-fpm/php.ini:/usr/local/etc/php/php.ini
             - ./www:/www
+    redis:
+        image: redis
+        ports:
+        - "6379:6379"
