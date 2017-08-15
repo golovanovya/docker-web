@@ -3,11 +3,13 @@ services:
     web:
         container_name: web
         image: nginx:latest
+        expose:
+            - "9000"
         ports:
             - "80:80"
         volumes:
             - ./www:/www
-            - ./.docker/images/nginx/vhosts.conf:/etc/nginx/conf.d/vhosts.conf
+            - ./conf.d/:/etc/nginx/conf.d/
         links:
             - php
             - redis
